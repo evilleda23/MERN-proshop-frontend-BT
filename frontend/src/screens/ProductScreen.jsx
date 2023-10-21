@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 
-import Rating from '../components/Rating';
+import environment from '../environments';
 import { get } from '../utils/http-request';
 
-import environment from '../environments';
+import Rating from '../components/Rating';
 
 function ProductScreen() {
   const { id: productId } = useParams();
@@ -15,7 +15,7 @@ function ProductScreen() {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const url = `${environment.getProductsUrl}/${productId}`;
+      const url = `${environment.getProductByIdUrl}/${productId}`;
       const data = await get(url);
       setProduct(data);
     };
