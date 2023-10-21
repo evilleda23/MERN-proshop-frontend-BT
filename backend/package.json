@@ -1,0 +1,21 @@
+{
+  "name": "proshop-v2",
+  "version": "1.0.0",
+  "description": "eCommerce application built with the MERN stack & Redux.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "keywords": [],
+  "author": "Estuardo Villeda",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
