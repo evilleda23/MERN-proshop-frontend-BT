@@ -13,6 +13,7 @@ import './assets/styles/index.css';
 
 import App from './App';
 import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter(
         index={true}
         path='/'
         element={<HomeScreen />}
+      />
+      <Route
+        path='/product/:id'
+        element={<ProductScreen />}
       />
     </Route>
   )
