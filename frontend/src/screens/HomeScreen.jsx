@@ -3,14 +3,14 @@ import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
 
 import { get } from '../utils/http-request';
-import enviroment from '../environments';
+import environment from '../environments';
 
 function HomeScreen() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const data = await get(enviroment.getProductsUrl);
+      const data = await get(environment.getProductsUrl);
       setProducts(data);
     };
     fetchProducts();

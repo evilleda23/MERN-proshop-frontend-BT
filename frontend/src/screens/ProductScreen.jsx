@@ -1,15 +1,26 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 
 import Rating from '../components/Rating';
+import { get } from '../utils/http-request';
 
-import products from '../products';
+import environment from '../environments';
 
 function ProductScreen() {
   const { id: productId } = useParams();
-  //TODO: fetch product by id from backend
-  const product = products.find(({ _id }) => _id === productId);
+
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const url = `${environment.getProductsUrl}/${productId}`;
+      const data = await get(url);
+      setProduct(data);
+    };
+    fetchProduct();
+  }, [productId]);
   return (
     <>
       <Link

@@ -1,7 +1,7 @@
+const backendUrl = 'http://localhost:5000/api';
 const environment = {
-  backendUrl: 'http://localhost:5000/api',
-
-  getProductsUrl: `${this.backendUrl}/products`,
+  getProductsUrl: `${backendUrl}/products`,
+  getProductById: `${backendUrl}/products`,
 };
 
 export default environment;
