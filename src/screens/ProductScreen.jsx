@@ -16,7 +16,8 @@ function ProductScreen() {
   useEffect(() => {
     const fetchProduct = async () => {
       const url = `${environment.getProductByIdUrl}/${productId}`;
-      const data = await get(url);
+      const { data } = await get(url);
+      console.log(data);
       setProduct(data);
     };
     fetchProduct();

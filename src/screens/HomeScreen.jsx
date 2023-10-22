@@ -10,7 +10,7 @@ function HomeScreen() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const data = await get(environment.getProductsUrl);
+      const { data } = await get(environment.getProductsUrl);
       setProducts(data);
     };
     fetchProducts();
