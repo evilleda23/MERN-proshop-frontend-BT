@@ -2,9 +2,11 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 
-import Rating from '../components/Rating';
 import { useGetProductByIdQuery } from '../slices/products.slice';
+
+import Rating from '../components/Rating';
 import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 function ProductScreen() {
   const { id: productId } = useParams();
@@ -18,7 +20,9 @@ function ProductScreen() {
       {isLoading ? (
         <Loader />
       ) : isError ? (
-        <h1>{error?.data?.message || error?.error || 'Error'}</h1>
+        <Message variant='danger'>
+          {error?.data?.message || error?.error || 'Error'}
+        </Message>
       ) : (
         <>
           <Link

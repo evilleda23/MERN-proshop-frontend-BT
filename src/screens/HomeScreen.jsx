@@ -1,8 +1,10 @@
 import { Row, Col } from 'react-bootstrap';
-import Product from '../components/Product';
 
 import { useGetProductsQuery } from '../slices/products.slice';
+
+import Product from '../components/Product';
 import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 function HomeScreen() {
   const { data, isLoading, isError, error } = useGetProductsQuery();
@@ -12,7 +14,9 @@ function HomeScreen() {
       {isLoading ? (
         <Loader />
       ) : isError ? (
-        <h1>{error?.data?.message || error?.error || 'Error'}</h1>
+        <Message variant='danger'>
+          {error?.data?.message || error?.error || 'Error'}
+        </Message>
       ) : (
         <>
           <h1>Latest Products</h1>
