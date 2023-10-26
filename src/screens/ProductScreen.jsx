@@ -11,7 +11,7 @@ import {
   Form,
 } from 'react-bootstrap';
 
-import { useGetProductByIdQuery } from '../slices/products.slice';
+import { useGetProductByIdQuery } from '../slices/products.api.slice';
 import { addToCart } from '../slices/cart.slice';
 
 import Rating from '../components/Rating';
