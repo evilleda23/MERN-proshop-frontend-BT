@@ -1,15 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Row,
-  Col,
-  Image,
-  ListGroup,
-  Card,
-  Button,
-  Form,
-} from 'react-bootstrap';
+import { Row, Col, Card, Button, Form } from 'react-bootstrap';
 
 import { useLoginMutation } from '../slices/users.api.slice';
 import { setCredentials } from '../slices/auth.slice';
@@ -35,11 +27,11 @@ function LoginScreen() {
 
   const redirect = sp.get('redirect') || '/';
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     navigate(redirect);
-  //   }
-  // }, [redirect, userInfo, navigate]);
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [redirect, userInfo, navigate]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -94,11 +86,11 @@ function LoginScreen() {
         </Form>
         <Row className='py-3'>
           <Col>
-            New Customer?{' '}
+            New to our site?{' '}
             <Link
               to={redirect ? `/register?redirect=${redirect}` : `/register`}
             >
-              Register
+              Register now!
             </Link>
           </Col>
         </Row>
