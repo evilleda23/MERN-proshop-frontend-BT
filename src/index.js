@@ -23,6 +23,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import ShippingScreen from './screens/ShippingScreen';
 
 import reportWebVitals from './reportWebVitals';
+import PrivateRoutes from './components/PrivateRoutes';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,10 +52,16 @@ const router = createBrowserRouter(
         path='/register'
         element={<RegisterScreen />}
       />
+
       <Route
-        path='/shipping'
-        element={<ShippingScreen />}
-      />
+        path=''
+        element={<PrivateRoutes />}
+      >
+        <Route
+          path='/shipping'
+          element={<ShippingScreen />}
+        />
+      </Route>
     </Route>
   )
 );
