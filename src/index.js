@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 
 import store from './store';
 
+import 'animate.css';
 import './assets/styles/bootstrap.custom.css';
 import './assets/styles/index.css';
 
@@ -21,9 +22,11 @@ import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
+
+import PrivateRoutes from './components/PrivateRoutes';
 
 import reportWebVitals from './reportWebVitals';
-import PrivateRoutes from './components/PrivateRoutes';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -60,6 +63,10 @@ const router = createBrowserRouter(
         <Route
           path='/shipping'
           element={<ShippingScreen />}
+        />
+        <Route
+          path='/payment'
+          element={<PaymentScreen />}
         />
       </Route>
     </Route>
