@@ -4,9 +4,10 @@ import { Form, Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import FormContainer from '../components/FormContainer';
-
 import { saveShippingAddress } from '../slices/cart.slice';
+
+import FormContainer from '../components/FormContainer';
+import CheckoutSteps from '../components/CheckoutSteps';
 
 function ShippingScreen() {
   const { shippingAddress } = useSelector((state) => state.cart);
@@ -28,6 +29,10 @@ function ShippingScreen() {
 
   return (
     <Card className='py-5'>
+      <CheckoutSteps
+        step1
+        step2
+      />
       <FormContainer>
         <h1>Shipping</h1>
         <Form onSubmit={submitHandler}>
