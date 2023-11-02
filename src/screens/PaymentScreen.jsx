@@ -8,7 +8,7 @@ import { savePaymentMethod } from '../slices/cart.slice';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
 
-function PaymentScreen() {
+const PaymentScreen = () => {
   const [paymentMethod, setPaymentMethod] = useState('PayPal');
 
   const dispatch = useDispatch();
@@ -64,6 +64,6 @@ function PaymentScreen() {
       </FormContainer>
     </Card>
   );
-}
+};
 
 export default PaymentScreen;

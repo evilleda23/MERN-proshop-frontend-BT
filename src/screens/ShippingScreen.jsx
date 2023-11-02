@@ -9,7 +9,7 @@ import { saveShippingAddress } from '../slices/cart.slice';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
 
-function ShippingScreen() {
+const ShippingScreen = () => {
   const { shippingAddress } = useSelector((state) => state.cart);
 
   const [address, setAddress] = useState(shippingAddress.address || '');
@@ -89,6 +89,6 @@ function ShippingScreen() {
       </FormContainer>
     </Card>
   );
-}
+};
 
 export default ShippingScreen;

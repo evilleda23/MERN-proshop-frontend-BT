@@ -6,7 +6,7 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
-function HomeScreen() {
+const HomeScreen = () => {
   const { data, isLoading, isError, error } = useGetProductsQuery();
   const { data: products } = data || {};
   return (
@@ -37,6 +37,6 @@ function HomeScreen() {
       )}
     </>
   );
-}
+};
 
 export default HomeScreen;

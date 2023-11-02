@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 
-function LoginScreen() {
+const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -97,6 +97,6 @@ function LoginScreen() {
       </FormContainer>
     </Card>
   );
-}
+};
 
 export default LoginScreen;

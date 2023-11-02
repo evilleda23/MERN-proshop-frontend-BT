@@ -15,7 +15,7 @@ import Message from '../components/Message';
 
 import { addToCart, removeFromCart } from '../slices/cart.slice';
 
-function CartScreen() {
+const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
@@ -125,6 +125,6 @@ function CartScreen() {
       </Col>
     </Row>
   );
-}
+};
 
 export default CartScreen;

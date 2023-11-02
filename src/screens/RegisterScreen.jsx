@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 
-function RegisterScreen() {
+const RegisterScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -137,6 +137,6 @@ function RegisterScreen() {
       </FormContainer>
     </Card>
   );
-}
+};
 
 export default RegisterScreen;

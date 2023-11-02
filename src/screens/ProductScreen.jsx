@@ -18,7 +18,7 @@ import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
-function ProductScreen() {
+const ProductScreen = () => {
   const { id: productId } = useParams();
 
   const [qty, setQty] = useState(1);
@@ -136,6 +136,6 @@ function ProductScreen() {
       )}
     </>
   );
-}
+};
 
 export default ProductScreen;
