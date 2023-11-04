@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +28,7 @@ const ShippingScreen = () => {
   };
 
   return (
-    <Card className='py-5'>
+    <>
       <CheckoutSteps stepNumber={2} />
       <FormContainer>
         <h1>Shipping</h1>
@@ -84,7 +84,7 @@ const ShippingScreen = () => {
           {/* {isLoading && <Loader />} */}
         </Form>
       </FormContainer>
-    </Card>
+    </>
   );
 };
 

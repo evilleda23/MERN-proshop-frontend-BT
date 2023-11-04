@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, Button, Col, Card } from 'react-bootstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,7 +30,7 @@ const PaymentScreen = () => {
   };
 
   return (
-    <Card className='py-5'>
+    <>
       <CheckoutSteps stepNumber={3} />
       <FormContainer>
         <Form onSubmit={submitHandler}>
@@ -58,7 +58,7 @@ const PaymentScreen = () => {
           </Button>
         </Form>
       </FormContainer>
-    </Card>
+    </>
   );
 };
 
