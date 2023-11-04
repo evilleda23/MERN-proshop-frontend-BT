@@ -40,11 +40,15 @@ const LoginScreen = () => {
 
       dispatch(setCredentials({ ...data }));
 
-      toast.success(message);
+      toast.success(message, {
+        position: 'bottom-right',
+      });
 
       navigate(redirect);
     } catch (error) {
-      toast.error(error?.data?.message || error?.error);
+      toast.error(error?.data?.message || error?.error,{
+        position: 'bottom-right',
+      });
     }
   };
 

@@ -43,11 +43,21 @@ const RegisterScreen = () => {
       password === '' ||
       confirmPassword === ''
     ) {
-      toast.warning('Please fill all the fields');
+      toast.warning('Please fill all the fields', {
+        position: 'bottom-right',
+      });
       return;
     }
     if (password !== confirmPassword) {
-      toast.warning('Passwords do not match');
+      toast.warning(
+        'Passwords do not match',
+        {
+          position: 'bottom-right',
+        },
+        {
+          position: 'bottom-right',
+        }
+      );
       return;
     }
 
@@ -61,11 +71,15 @@ const RegisterScreen = () => {
 
       dispatch(setCredentials({ ...data }));
 
-      toast.success(message);
+      toast.success(message,{
+        position: 'bottom-right',
+      });
 
       navigate(redirect);
     } catch (error) {
-      toast.error(error?.data?.message || error?.error);
+      toast.error(error?.data?.message || error?.error,{
+        position: 'bottom-right',
+      });
     }
   };
 
