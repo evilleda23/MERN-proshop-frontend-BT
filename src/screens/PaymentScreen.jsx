@@ -31,11 +31,7 @@ const PaymentScreen = () => {
 
   return (
     <Card className='py-5'>
-      <CheckoutSteps
-        step1
-        step2
-        step3
-      />
+      <CheckoutSteps stepNumber={3} />
       <FormContainer>
         <Form onSubmit={submitHandler}>
           <Form.Group>

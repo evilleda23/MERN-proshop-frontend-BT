@@ -29,10 +29,7 @@ const ShippingScreen = () => {
 
   return (
     <Card className='py-5'>
-      <CheckoutSteps
-        step1
-        step2
-      />
+      <CheckoutSteps stepNumber={2} />
       <FormContainer>
         <h1>Shipping</h1>
         <Form onSubmit={submitHandler}>
