@@ -24,9 +24,6 @@ function Header() {
     try {
       const { message } = await logoutApi().unwrap();
       dispatch(logout());
-      toast.success(message, {
-        position: 'bottom-right',
-      });
       navigate('/login');
     } catch (error) {
       console.log(error);

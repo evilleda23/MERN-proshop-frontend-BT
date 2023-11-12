@@ -71,10 +71,6 @@ const RegisterScreen = () => {
 
       dispatch(setCredentials({ ...data }));
 
-      toast.success(message,{
-        position: 'bottom-right',
-      });
-
       navigate(redirect);
     } catch (error) {
       toast.error(error?.data?.message || error?.error,{
