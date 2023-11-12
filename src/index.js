@@ -27,6 +27,7 @@ import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 import PrivateRoutes from './components/PrivateRoutes';
 
@@ -64,6 +65,10 @@ const router = createBrowserRouter(
         path=''
         element={<PrivateRoutes />}
       >
+        <Route
+          path='/profile'
+          element={<ProfileScreen />}
+        />
         <Route
           path='/shipping'
           element={<ShippingScreen />}
