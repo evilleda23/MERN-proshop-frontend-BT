@@ -9,6 +9,8 @@ import Loader from '../components/Loader';
 
 import { useProfileMutation } from '../slices/users.api.slice';
 import { setCredentials } from '../slices/auth.slice';
+import { useGetMyOrdersQuery } from '../slices/order.api.slice';
+import { FaTimes } from 'react-icons/fa';
 
 const ProfileScreen = () => {
   const [name, setName] = useState('');
@@ -18,8 +20,15 @@ const ProfileScreen = () => {
 
   const dispatch = useDispatch();
 
-  const [updateProfile, { isLoading: loadingUpdateProfile, error, data }] =
+  const [updateProfile, { isLoading: loadingUpdateProfile }] =
     useProfileMutation();
+
+  const {
+    data: { data: orders } = {},
+    isLoading,
+    isError,
+    error,
+  } = useGetMyOrdersQuery();
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -55,6 +64,7 @@ const ProfileScreen = () => {
   return (
     <Row>
       <Col md={4}>
+        <h2>User Profile</h2>
         <Form onSubmit={submitHandler}>
           <Form.Group
             controlId='name'
@@ -115,7 +125,67 @@ const ProfileScreen = () => {
           </Form.Group>
         </Form>
       </Col>
-      <Col md={8}>Column</Col>
+      <Col md={8}>
+        <h2>My Orders</h2>
+        {isLoading ? (
+          <Loader />
+        ) : isError ? (
+          <Message variant='danger'>
+            {error?.data?.message || error?.error || 'Error'}
+          </Message>
+        ) : (
+          <Table
+            striped
+            hover
+            responsive
+            className='table-sm'
+          >
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Paid</th>
+                <th>Delivered</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders?.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                  <td>${order.totalPrice}</td>
+                  <td>
+                    {order.isPaid ? (
+                      new Date(order.paidAt).toLocaleDateString()
+                    ) : (
+                      <FaTimes style={{ color: 'red' }} />
+                    )}
+                  </td>
+                  <td>
+                    {order.isDelivered ? (
+                      new Date(order.deliveredAt).toLocaleDateString()
+                    ) : (
+                      <FaTimes style={{ color: 'red' }} />
+                    )}
+                  </td>
+                  <td>
+                    <LinkContainer to={`/order/${order._id}`}>
+                      <Button
+                        className='btn-sm'
+                        variant='link'
+                      >
+                        Details
+                      </Button>
+                    </LinkContainer>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
+      </Col>
     </Row>
   );
 };
