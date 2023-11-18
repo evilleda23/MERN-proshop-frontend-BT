@@ -125,6 +125,7 @@ const ProfileScreen = () => {
           </Form.Group>
         </Form>
       </Col>
+      {/* //TODO: Imrpove table*/}
       <Col md={8}>
         <h2>My Orders</h2>
         {isLoading ? (

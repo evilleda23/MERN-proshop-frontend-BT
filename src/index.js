@@ -18,18 +18,26 @@ import './assets/styles/index.css';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 import App from './App';
+
+//* Public Screens
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+
+//* Private Screens
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
-import PrivateRoutes from './components/PrivateRoutes';
+//* Admin Screens
+import OrderListScreen from './screens/admin/OrderListScreen';
+
+import PrivateRoute from './components/PrivateRoute';
+import AdminRoute from './components/AdminRoute';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -60,10 +68,10 @@ const router = createBrowserRouter(
         path='/register'
         element={<RegisterScreen />}
       />
-
+      {/* Rutas privadas */}
       <Route
         path=''
-        element={<PrivateRoutes />}
+        element={<PrivateRoute />}
       >
         <Route
           path='/profile'
@@ -84,6 +92,17 @@ const router = createBrowserRouter(
         <Route
           path='/order/:id'
           element={<OrderScreen />}
+        />
+      </Route>
+
+      {/* Rutas privadas para administradores */}
+      <Route
+        path=''
+        element={<AdminRoute />}
+      >
+        <Route
+          path='/admin/orderlist'
+          element={<OrderListScreen />}
         />
       </Route>
     </Route>

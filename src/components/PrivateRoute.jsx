@@ -2,7 +2,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
-function PrivateRoutes() {
+function PrivateRoute() {
   const { userInfo } = useSelector((state) => state.auth);
   return userInfo ? (
     <Outlet />
@@ -14,4 +14,4 @@ function PrivateRoutes() {
   );
 }
 
-export default PrivateRoutes;
+export default PrivateRoute;
