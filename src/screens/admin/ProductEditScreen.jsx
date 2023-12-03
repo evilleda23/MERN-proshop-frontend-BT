@@ -3,9 +3,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { FaArrowLeft } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+
 import {
   useGetProductByIdQuery,
   useUpdateProductMutation,
+  useUploadProductImageMutation,
 } from '../../slices/products.api.slice';
 
 import Message from '../../components/Message';
@@ -24,6 +26,7 @@ const ProductEditScreen = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [brand, setBrand] = useState('');
+  const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState('');
@@ -34,6 +37,7 @@ const ProductEditScreen = () => {
     if (!product) return;
     setName(product.name);
     setPrice(product.price);
+    setImage(product.image);
     setBrand(product.brand);
     setCategory(product.category);
     setCountInStock(product.countInStock);
@@ -43,21 +47,39 @@ const ProductEditScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      await updateProduct({
-        id: productId,
-        name,
-        price,
-        brand,
-        category,
-        countInStock,
-        description,
-      });
+      await updateProduct(
+        {
+          id: productId,
+          name,
+          price,
+          brand,
+          category,
+          countInStock,
+          description,
+        }.unwrap()
+      );
       toast.success('Product updated successfully', {
         position: 'bottom-right',
       });
       refetch();
       navigate('/admin/productlist');
     } catch (error) {
+      toast.error(error?.data?.message || error?.error, {
+        position: 'bottom-right',
+      });
+    }
+  };
+
+  const [uploadProductImage, { isLoading: loadingUpload }] =
+    useUploadProductImageMutation();
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append('image', e.target.files[0]);
+    try {
+      // const res = await uploadProductImage(formData).unwrap();
+      // toast.success(res.message);
+      // setImage(res.image);
+    } catch (err) {
       toast.error(error?.data?.message || error?.error, {
         position: 'bottom-right',
       });
@@ -106,7 +128,30 @@ const ProductEditScreen = () => {
                 step={0.01}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId='brand'>
+            <Form.Group
+              controlId='image'
+              className='my-1'
+            >
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter image url'
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                className='my-1'
+              ></Form.Control>
+              <Form.Control
+                label='Choose File'
+                onChange={uploadFileHandler}
+                type='file'
+                className='my-1'
+              ></Form.Control>
+              {loadingUpload && <Loader />}
+            </Form.Group>
+            <Form.Group
+              controlId='brand'
+              className='my-1'
+            >
               <Form.Label>Brand</Form.Label>
               <Form.Control
                 type='text'

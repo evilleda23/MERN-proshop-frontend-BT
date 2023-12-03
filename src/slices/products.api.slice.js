@@ -1,4 +1,4 @@
-import { PRODUCTS_URL } from '../environments/environment';
+import { PRODUCTS_URL, UPLOADS_URL } from '../environments/environment';
 
 import { apiSlice } from './api.slice';
 
@@ -29,6 +29,14 @@ export const productsSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Products'],
     }),
+    uploadProductImage: builder.mutation({
+      query: (body) => ({
+        url: `${UPLOADS_URL}`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Products'],
+    }),
   }),
 });
 
@@ -37,4 +45,5 @@ export const {
   useGetProductByIdQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
+  useUploadProductImageMutation,
 } = productsSlice;
