@@ -10,6 +10,7 @@ import Message from '../../components/Message';
 import {
   useGetProductsQuery,
   useCreateProductMutation,
+  useDeleteProductMutation,
 } from '../../slices/products.api.slice';
 
 const ProductListScreen = () => {
@@ -41,8 +42,23 @@ const ProductListScreen = () => {
       });
     }
   };
-
-  const deleteHandler = (id) => {};
+  const [deleteProduct, { isLoading: loadingDelete }] =
+    useDeleteProductMutation();
+  const deleteHandler = async (id) => {
+    if (window.confirm('Are you sure?')) {
+      try {
+        await deleteProduct(id);
+        toast.success('Product deleted successfully', {
+          position: 'bottom-right',
+        });
+        refetch();
+      } catch (error) {
+        toast.error(error?.data?.message || error?.error, {
+          position: 'bottom-right',
+        });
+      }
+    }
+  };
   return (
     <>
       <Row className='align-items-center'>
@@ -60,6 +76,7 @@ const ProductListScreen = () => {
         </Col>
       </Row>
       {loadingCreate && <Loader />}
+      {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -99,6 +116,7 @@ const ProductListScreen = () => {
                       <FaEdit />
                     </Button>
                   </LinkContainer>
+
                   <Button
                     variant='danger'
                     className='btn-sm'

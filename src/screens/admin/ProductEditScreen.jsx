@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import { FaArrowLeft } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 import {
@@ -76,9 +75,9 @@ const ProductEditScreen = () => {
     const formData = new FormData();
     formData.append('image', e.target.files[0]);
     try {
-      // const res = await uploadProductImage(formData).unwrap();
-      // toast.success(res.message);
-      // setImage(res.image);
+      const res = await uploadProductImage(formData).unwrap();
+      toast.success(res.message);
+      setImage(res.image);
     } catch (err) {
       toast.error(error?.data?.message || error?.error, {
         position: 'bottom-right',
