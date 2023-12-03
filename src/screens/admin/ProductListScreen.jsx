@@ -6,14 +6,41 @@ import { FaTimes, FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 
-import { useGetProductsQuery } from '../../slices/products.api.slice';
+import {
+  useGetProductsQuery,
+  useCreateProductMutation,
+} from '../../slices/products.api.slice';
+import { toast } from 'react-toastify';
 
 const ProductListScreen = () => {
   const {
     data: { data: products } = {},
     isLoading,
     error,
+    refetch,
   } = useGetProductsQuery();
+
+  const [createProduct, { isLoading: loadingCreate }] =
+    useCreateProductMutation();
+  const createProductHandler = async () => {
+    try {
+      //TODO: create a new screen to create a product
+      await createProduct({
+        name: 'Sample name',
+        price: 0,
+        image: '/images/sample.jpg',
+        brand: 'Sample brand',
+        category: 'Sample category',
+        countInStock: 0,
+        description: 'Sample description',
+      });
+      refetch();
+    } catch (error) {
+      toast.error(error?.data?.message || error?.error, {
+        position: 'bottom-right',
+      });
+    }
+  };
   const deleteHandler = (id) => {};
   return (
     <>
@@ -22,12 +49,16 @@ const ProductListScreen = () => {
           <h1>Products</h1>
         </Col>
         <Col className='text-end'>
-          <Button className='btn-sm  m-3'>
+          <Button
+            className='btn-sm  m-3'
+            onClick={() => createProductHandler()}
+          >
             <FaPlus className='pb-1 me-2' />
             Create Product
           </Button>
         </Col>
       </Row>
+      {loadingCreate && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (
