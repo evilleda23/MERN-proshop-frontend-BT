@@ -46,17 +46,16 @@ const ProductEditScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      await updateProduct(
-        {
-          id: productId,
-          name,
-          price,
-          brand,
-          category,
-          countInStock,
-          description,
-        }.unwrap()
-      );
+      await updateProduct({
+        id: productId,
+        name,
+        price,
+        brand,
+        image,
+        category,
+        countInStock,
+        description,
+      }).unwrap();
       toast.success('Product updated successfully', {
         position: 'bottom-right',
       });
@@ -75,9 +74,11 @@ const ProductEditScreen = () => {
     const formData = new FormData();
     formData.append('image', e.target.files[0]);
     try {
-      const res = await uploadProductImage(formData).unwrap();
-      toast.success(res.message);
-      setImage(res.image);
+      const { data: { image } = {}, message } = await uploadProductImage(
+        formData
+      ).unwrap();
+      toast.success(message);
+      setImage(image);
     } catch (err) {
       toast.error(error?.data?.message || error?.error, {
         position: 'bottom-right',
