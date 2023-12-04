@@ -4,6 +4,11 @@ import { apiSlice } from './api.slice';
 
 export const usersSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getUsers: builder.query({
+      query: () => ({ url: USERS_URL }),
+      keepUnusedDataFor: 5,
+      providesTags: ['Users'],
+    }),
     register: builder.mutation({
       query: (data) => ({
         url: `${USERS_URL}/register`,
@@ -31,12 +36,28 @@ export const usersSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    updateUser: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `${USERS_URL}/${id}`,
+        method: 'PUT',
+        body,
+      }),
+    }),
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `${USERS_URL}/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
 export const {
+  useGetUsersQuery,
   useRegisterMutation,
   useLoginMutation,
   useLogoutMutation,
   useProfileMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
 } = usersSlice;
