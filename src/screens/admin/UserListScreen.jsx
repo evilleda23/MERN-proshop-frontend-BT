@@ -1,7 +1,7 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col, FormCheck } from 'react-bootstrap';
-import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 import Loader from '../../components/Loader';
@@ -9,7 +9,6 @@ import Message from '../../components/Message';
 
 import {
   useGetUsersQuery,
-  useCreateUserMutation,
   useDeleteUserMutation,
 } from '../../slices/users.api.slice';
 
@@ -21,26 +20,6 @@ const UserListScreen = () => {
     refetch,
   } = useGetUsersQuery();
 
-  // const [createUser, { isLoading: loadingCreate }] = useCreateUserMutation();
-  // const createUserHandler = async () => {
-  //   try {
-  //     //TODO: create a new screen to create a product
-  //     await createUser({
-  //       name: 'Sample name',
-  //       price: 0,
-  //       image: '/images/sample.jpg',
-  //       brand: 'Sample brand',
-  //       category: 'Sample category',
-  //       countInStock: 0,
-  //       description: 'Sample description',
-  //     });
-  //     refetch();
-  //   } catch (error) {
-  //     toast.error(error?.data?.message || error?.error, {
-  //       position: 'bottom-right',
-  //     });
-  //   }
-  // };
   const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation();
   const deleteHandler = async (id) => {
     if (window.confirm('Are you sure?')) {
@@ -62,15 +41,6 @@ const UserListScreen = () => {
       <Row className='align-items-center'>
         <Col>
           <h1>Users</h1>
-        </Col>
-        <Col className='text-end'>
-          {/* <Button
-            className='btn-sm  m-3'
-            onClick={() => createUserHandler()}
-          >
-            <FaPlus className='pb-1 me-2' />
-            Create User
-          </Button> */}
         </Col>
       </Row>
 
