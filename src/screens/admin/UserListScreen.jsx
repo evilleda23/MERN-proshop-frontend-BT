@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button, Row, Col, FormCheck } from 'react-bootstrap';
+import { Table, Button, Row, Col, Form } from 'react-bootstrap';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
@@ -80,13 +80,11 @@ const UserListScreen = () => {
                   </a>
                 </td>
                 <td>
-                  <FormCheck>
-                    <FormCheck.Input
-                      type='checkbox'
-                      checked={user?.isAdmin}
-                      disabled
-                    />
-                  </FormCheck>
+                  <Form.Check
+                    type='checkbox'
+                    checked={user?.isAdmin}
+                    disabled
+                  ></Form.Check>
                 </td>
                 <td className='d-flex justify-content-around'>
                   <LinkContainer to={`/admin/user/${user._id}/edit`}>
